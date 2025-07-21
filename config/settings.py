@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-bsm7jt6-m8s%o820nv91unu!4e92#p!uokj@4uylhldsv-%cqd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1:8000","movie-recommendation-2ylbpuc3m.vercel.app"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "movie-recommendation-2ylbpuc3m.vercel.app",
+    "movie-recommendation-n7g6swyro.vercel.app",  # ← add this
+]
 
 
 # Application definition
