@@ -1,0 +1,75 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+
+# Media & static (optional if dynamically generated)
+media/
+staticfiles/
+
+# Backup files
+*.bak
+*.tmp
+*.swp
+
+# Env files and secrets
+.env
+*.env
+.env.*
+
+# VSCode or other editor settings
+.vscode/
+.idea/
+
+# Virtual environment
+venv/
+./env/
+ENV/
+.venv/
+.ENV/
+
+# Migrations (optional if you want fresh migrations per dev)
+**/migrations/*.py
+**/migrations/*.pyc
+!*/migrations/__init__.py  # Keep __init__.py to ensure it's a package
+
+# Node/npm related (if frontend is integrated)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Coverage and test outputs
+.coverage
+htmlcov/
+.tox/
+.nox/
+pytest_cache/
+
+# MyPy, Pyright, pylint, flake8, black
+.mypy_cache/
+.pyright/
+.pytest_cache/
+.dmypy.json
+.pyre/
+.cache/
+ruff_cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
