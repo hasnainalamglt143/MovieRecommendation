@@ -1,0 +1,113 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Movie Recommender</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+          rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js">
+    </script>
+
+    <style>
+        body {
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+
+        /* Override Select2 styles */
+        .select2-container--default .select2-selection--single {
+            background-color: #1e293b; /* Tailwind's gray-800 */
+            color: white;
+            height: 42px;
+            padding: 6px 12px;
+            border-radius: 0.5rem;
+            font-size:16px
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #f1f5f9; /* Tailwind slate-100 */
+        }
+
+        .select2-dropdown {
+            background-color: #1e293b;
+            color: white;
+        }
+
+        .select2-results__option {
+            padding: 10px;
+        }
+
+        .select2-results__option--highlighted {
+            background-color: #06b6d4 !important;
+            color: white;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start p-8">
+    <h1 class="text-6xl font-bold mb-6 text-center text-cyan-400">
+        🎬 Movie Recommender
+    </h1>
+
+    <form action="{% url 'recommend_movies' %}"
+          class="w-full max-w-3xl bg-gray-900 p-6 rounded-xl shadow-md"
+          method="POST">
+        {% csrf_token %}
+        <label class="block mb-2 text-2xl font-medium text-gray-300"
+               for="movie">
+            Select a Movie
+        </label>
+        <select class="w-full select2 p-3"
+                id="movie-select"
+                name="movie"
+                required>
+            <option class="text-black"></option>
+            <!-- Placeholder -->
+            {% for title in movies_titles %}
+            <option value="{{ title }}">{{ title }}</option>
+            {% endfor %}
+        </select>
+
+        <button class="mt-10 w-full bg-cyan-500 hover:bg-cyan-600 ,text-white font-bold py-2 px-4 rounded-lg transition"
+                type="submit">
+            🔍 Recommend
+        </button>
+    </form>
+    {% if posters %}
+    <h2 class="mt-10 text-3xl font-semibold text-cyan-300">
+        Recommended Movies for "{{ selected_movie }}"
+    </h2>
+    <div class="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+        {% for movie in posters %}
+        <div class="bg-gray-700 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition relative">
+            {% if movie.path %}
+            <img alt="{{ movie.title }}"
+                 class="w-full h-72 object-cover"
+                 src="{{ movie.path }}" />
+            <div class="p-4 text-center bg-gray-900">
+                <h2 class="text-xl font-semibold text-cyan-300">
+                    {{ movie.title }}
+                </h2>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <script>
+        $(document).ready(function() {
+            $('#movie-select').select2({
+                placeholder: 'Search for a movie...',
+                width: '100%'
+            });
+        });
+    </script>
+</body>
+</html>
